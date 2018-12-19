@@ -11,7 +11,7 @@ function getParameter(val) {
 
 // custom layout
 
-var isCombination = false;
+var combinationKeys = 0;
 
 var layout_folder_name = '';
 
@@ -148,31 +148,30 @@ KeystrokeClient.onKeyDown = function (key_code) {
     // Combination Key Down
     switch (key_code) {
         case 'a2': // left ctrl
-            isCombination = true; break;
+            combinationKeys++; break;
         case 'a0': // left shift
-            isCombination = true; break;
+            combinationKeys++; break;
         case 'a4': // left alt
-            isCombination = true; break;
+            combinationKeys++; break;
         case '15b': // left win
-            isCombination = true; break;
+            combinationKeys++; break;
         case '1a3': // right ctrl
-            isCombination = true; break;
+            combinationKeys++; break;
         case '1a1': // right shift
-            isCombination = true; break;
+            combinationKeys++; break;
         case '1a5': // right alt
-            isCombination = true; break;
+            combinationKeys++; break;
         case '15c': // right win
-            isCombination = true; break;
+            combinationKeys++; break;
     }
 
-    if (container.length && isCombination == true) {
+    if (container.length && combinationKeys != 0) {
         container.addClass('pressed');
 
         switch (key_code) {
             case '0a': // mouse wheel up
                 if (mouse_wheel_up_timer !== null)
                     clearTimeout(mouse_wheel_up_timer);
-                mouse_wheel_up_timer = setTimeout(function () { mouse_wheel_up_timer = null; container.removeClass('pressed'); }, 100);
                 break;
 
             case '0b': // mouse wheel down
@@ -189,21 +188,21 @@ KeystrokeClient.onKeyUp = function (key_code) {
     // Combination Key Up
     switch (key_code) {
         case 'a2': // left ctrl
-            isCombination = false; break;
+            combinationKeys--; break;
         case 'a0': // left shift
-            isCombination = false; break;
+            combinationKeys--; break;
         case 'a4': // left alt
-            isCombination = false; break;
+            combinationKeys--; break;
         case '15b': // left win
-            isCombination = false; break;
+            combinationKeys--; break;
         case '1a3': // right ctrl
-            isCombination = false; break;
+            combinationKeys--; break;
         case '1a1': // right shift
-            isCombination = false; break;
+            combinationKeys--; break;
         case '1a5': // right alt
-            isCombination = false; break;
+            combinationKeys--; break;
         case '15c': // right win
-            isCombination = false; break;
+            combinationKeys--; break;
     }
 
     var container = $('.key-' + key_code);
